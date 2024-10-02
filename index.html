@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEREKET STORE</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        .banner-logo-container {
+            max-width: 80%;
+            margin: 0 auto;
+        }
+        .banner-logo {
+            max-height: 300px;
+            width: auto;
+            object-fit: contain;
+        }
+        @media (max-width: 767px) {
+            .banner-logo-container {
+                max-width: 60%;
+                margin-bottom: 2rem;
+            }
+            .banner-logo {
+                max-height: 200px;
+            }
+        }
+        .banner {
+            position: relative;
+            background-color: #000; /* Warna latar belakang cadangan */
+            min-height: 100vh; /* Tinggi minimal sesuai tinggi viewport */
+            display: flex;
+            align-items: center;
+            background-image: url('backgroundimage.jpg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .banner .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .gallery-img-container {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+
+        .gallery-img-container-wide {
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 767px) {
+            .gallery-img-container,
+            .gallery-img-container-wide {
+                aspect-ratio: 4 / 3;
+            }
+        }
+
+        .testimonials {
+            background-color: #f8f9fa;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-card {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(0px);
+            background-color: #b59261;
+        }
+
+        .testimonial-card:hover .testimonial-name,
+        .testimonial-card:hover .testimonial-job,
+        .testimonial-card:hover .testimonial-text {
+            color: white !important;
+        }
+
+        .testimonial-card:hover .testimonial-stars {
+            color: #ffc107 !important;
+        }
+
+        @media (min-width: 768px) {
+            .testimonial-text {
+                font-size: 1rem;
+            }
+        }
+
+        .faq {
+            background-color: #f8f9fa;
+        }
+
+        .accordion-button:not(.collapsed) {
+            color: #ffffff;
+            background-color: #b59261;
+        }
+
+        .accordion-button:focus {
+            border-color: #b59261;
+            box-shadow: 0 0 0 0.25rem rgba(181, 146, 97, 0.25);
+        }
+
+        .accordion-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        .contact {
+            background-color: #f8f9fa;
+        }
+
+        .contact-item {
+            background-color: #ffffff;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .contact-item i {
+            color: #b59261;
+        }
+        .contact-item:hover {
+            background-color: #b59261; /* Lapisan gelap semi-transparan */
+            color: black;
+        }
+
+        .contact-form {
+            background-color: #ffffff;
+        }
+
+        .form-control:focus {
+            border-color: #b59261;
+            box-shadow: 0 0 0 0.25rem rgba(181, 146, 97, 0.25);
+        }
+
+        .btn-primary {
+            background-color: #b59261;
+            border-color: #b59261;
+        }
+
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: #a17f4a;
+            border-color: #a17f4a;
+        }
+
+        @media (max-width: 767px) {
+            .contact-item {
+                margin-bottom: 1rem;
+            }
+        }
+
+        nav.navbar, .navbar, #navbar {
+            background-color: #b59261 !important;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide .card {
+            width: 100%;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="56">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="Logo BS.png" alt="Logo Saya" class="img-fluid" style="max-height: 40px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#banner">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about-us">Tentang Kami</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimoni</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#lokasi">Lokasi</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner" class="banner">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-white">
+                    <h1 class="display-4">Selamat Datang Di Bereket Store</h1>
+                    <p class="lead">Temukan produk berkualitas terbaik untuk kebutuhan sehari-hari.</p>
+                    <a href="#products" class="btn btn-light btn-lg" data-aos="fade-right" data-aos-duration="1500">Lihat Produk Kami</a>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="Logo BS.png" alt="Logo BS" class="img-fluid mt-4 pt-4" style="max-height: 400px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Kami -->
+    <section class="about-us py-5 bg-light" id="about-us">
+        <div class="container mt-4 pt-4">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="Logo BS.png" alt="Tentang Kami" class="img-fluid rounded shadow-lg">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="display-4 fw-bold mb-4">Tentang Kami</h2>
+                    <p class="lead mb-4">Bereket Store adalah toko yang menyediakan berbagai produk berkualitas tinggi untuk memenuhi kebutuhan sehari-hari Anda. Kami berkomitmen untuk memberikan pelayanan terbaik dan produk yang terjamin kualitasnya. Kami percaya bahwa setiap pelanggan berhak mendapatkan pengalaman berbelanja yang menyenangkan. Oleh karena itu, kami selalu berusaha untuk menghadirkan produk-produk terbaru dan terbaik dengan harga yang kompetitif. Dengan berbagai pilihan produk yang kami tawarkan, kami berharap dapat memenuhi semua kebutuhan Anda, mulai dari bahan makanan hingga kebutuhan rumah tangga. Bergabunglah dengan kami dan temukan produk berkualitas untuk kehidupan sehari-hari Anda..</p>
+                    <div class="row g-4">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary fs-4 me-2"></i>
+                                <p class="mb-0">Pelayanan Berkualitas</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-people-fill text-primary fs-4 me-2"></i>
+                                <p class="mb-0">Tim Profesional</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-graph-up-arrow text-primary fs-4 me-2"></i>
+                                <p class="mb-0">Pertumbuhan Bisnis</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-shield-check text-primary fs-4 me-2"></i>
+                                <p class="mb-0">Keamanan Terjamin</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-lg mt-4">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produk -->
+    <section class="products py-5" id="products">
+        <div class="container mt-4 pt-4">
+            <h2 class="text-center display-4 fw-bold mb-5">Produk Kami</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="gulmerproduk.jpg" class="card-img-top" alt="Produk 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Gula Merah Aren</h5>
+                            <p class="card-text">Gula Merah 100% Dari Aren.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 mb-0">Rp. 21.000/kg</span>
+                                <a href="https://wa.me/6281354325595" class="btn btn-primary">Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="maduproduk.jpg" class="card-img-top" alt="Produk 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Madu Hutan</h5>
+                            <p class="card-text">Madu hutan 100% Alami.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 mb-0">Rp. 180.000/Botol</span>
+                                <a href="https://wa.me/6281354325595" class="btn btn-primary">Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="berasproduk.jpg" class="card-img-top" alt="Produk 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Beras</h5>
+                            <p class="card-text">Beras Alami Yang Berkualitas.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 mb-0">Rp 11.000/kg</span>
+                                <a href="https://wa.me/6281354325595" class="btn btn-primary">Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery py-5 bg-light" id="gallery">
+        <div class="container mt-4 pt-4">
+            <h2 class="text-center display-4 fw-bold mb-5">Galeri Kami</h2>
+            <div class="row g-4">
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-img-container">
+                        <img src="berasproduk.jpg" alt="Galeri 1" class="img-fluid rounded gallery-img">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-img-container">
+                        <img src="gulmerproduk.jpg" alt="Galeri 2" class="img-fluid rounded gallery-img">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-img-container">
+                        <img src="maduproduk.jpg" alt="Galeri 3" class="img-fluid rounded gallery-img">
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-12">
+                    <div class="gallery-img-container-wide">
+                        <img src="berasabout.jpg" alt="Galeri 4" class="img-fluid rounded gallery-img">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-img-container">
+                        <img src="maduabout.jpg" alt="Galeri 5" class="img-fluid rounded gallery-img">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-img-container">
+                        <img src="gulmerabout.jpg" alt="Galeri 6" class="img-fluid rounded gallery-img">
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-12">
+                    <div class="gallery-img-container-wide">
+                        <img src="berasabout2.jpeg" alt="Galeri 7" class="img-fluid rounded gallery-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials py-5 bg-light" id="testimonials">
+        <div class="container mt-4 pt-4">
+            <h2 class="text-center display-4 fw-bold mb-5">Testimoni Pelanggan</h2>
+            <div class="swiper testimonialSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm testimonial-card">
+                            <div class="card-body text-center">
+                                <img src="profil.jpg" alt="Pelanggan 1" class="rounded-circle mb-3" width="100">
+                                <h5 class="card-title testimonial-name">Andi Pratama</h5>
+                                <p class="card-text text-muted mb-3 testimonial-job">Pengusaha</p>
+                                <p class="card-text testimonial-text">"Produk Bereket Store sangat berkualitas! Saya sangat puas dengan pelayanan dan produk yang ditawarkan. Sangat direkomendasikan untuk semua orang."</p>
+                                <div class="text-warning mb-3 testimonial-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm testimonial-card">
+                            <div class="card-body text-center">
+                                <img src="profil.jpg" alt="Pelanggan 2" class="rounded-circle mb-3" width="100">
+                                <h5 class="card-title testimonial-name">Siti Rahma</h5>
+                                <p class="card-text text-muted mb-3 testimonial-job">Ibu Rumah Tangga</p>
+                                <p class="card-text testimonial-text">"Saya telah berbelanja di Bereket Store beberapa kali dan selalu mendapatkan pengalaman yang menyenangkan. Produk yang saya beli selalu memuaskan."</p>
+                                <div class="text-warning mb-3 testimonial-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimoni tambahan 1 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm testimonial-card">
+                            <div class="card-body text-center">
+                                <img src="profil.jpg" alt="Pelanggan 3" class="rounded-circle mb-3" width="100">
+                                <h5 class="card-title testimonial-name">Budi Santoso</h5>
+                                <p class="card-text text-muted mb-3 testimonial-job">Petani</p>
+                                <p class="card-text testimonial-text">"Gula aren dari Bereket Store sangat murni dan berkualitas tinggi. Saya menggunakannya untuk produk olahan saya dan hasilnya luar biasa."</p>
+                                <div class="text-warning mb-3 testimonial-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimoni tambahan 2 -->
+                    <div class="swiper-slide">
+                        <div class="card h-100 shadow-sm testimonial-card">
+                            <div class="card-body text-center">
+                                <img src="profil.jpg" alt="Pelanggan 4" class="rounded-circle mb-3" width="100">
+                                <h5 class="card-title testimonial-name">Dewi Lestari</h5>
+                                <p class="card-text text-muted mb-3 testimonial-job">Pemilik Kafe</p>
+                                <p class="card-text testimonial-text">"Madu dari Bereket Store menjadi favorit pelanggan kafe saya. Rasanya autentik dan kualitasnya terjaga. Terima kasih Bereket Store!"</p>
+                                <div class="text-warning mb-3 testimonial-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq py-5" id="faq">
+        <div class="container mt-4 pt-4">
+            <h2 class="text-center display-4 fw-bold mb-5">Pertanyaan yang Sering Diajukan</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Waktu pengiriman dapat bervariasi tergantung pada lokasi Anda dan jenis produk yang dipesan. Secara umum:
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Waktu pengiriman dapat bervariasi tergantung pada lokasi Anda dan jenis produk yang dipesan. Secara umum:
+                            <ul>
+                                <li>Untuk area Gowa dan Makassar, pengiriman biasanya memakan waktu 1-2 hari kerja.</li>
+                                <li>Untuk kota-kota besar di Pulau Sulawesi, pengiriman memakan waktu 2-4 hari kerja.</li>
+                                <li>Untuk daerah lain di Indonesia, pengiriman dapat memakan waktu 3-7 hari kerja.</li>
+                            </ul>
+                            Kami selalu berusaha untuk memproses dan mengirimkan pesanan secepat mungkin. Anda akan menerima nomor resi setelah pesanan Anda dikirim, sehingga Anda dapat melacak status pengiriman Anda.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Produk apa saja yang ditawarkan?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Kami menawarkan berbagai produk berkualitas tinggi seperti beras, madu, dan gula aren.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Apakah semua produknya 100% alami?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Ya, kami menjual produk dengan 100% alami.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak -->
+    <section class="contact py-5" id="contact">
+        <div class="container mt-4 pt-4">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-4 fw-bold mb-3">Hubungi Kami</h2>
+                    <p class="lead text-muted">Kami siap membantu Anda. Jangan ragu untuk menghubungi kami kapan saja.</p>
+                </div>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="contact-item text-center p-4 rounded shadow-sm h-100">
+                        <i class="bi bi-geo-alt-fill display-5 text-primary mb-3"></i>
+                        <h4 class="mb-3">Alamat</h4>
+                        <p class="mb-0">Kompleks Pondok Pesantren Tanwirussunnah, Blok E2 No. 18, Kabupaten Gowa, Sulawesi Selatan.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-item text-center p-4 rounded shadow-sm h-100">
+                        <i class="bi bi-telephone-fill display-5 text-primary mb-3"></i>
+                        <h4 class="mb-3">Telepon</h4>
+                        <p class="mb-0">+62 8135 4325 595</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-item text-center p-4 rounded shadow-sm h-100">
+                        <i class="bi bi-envelope-fill display-5 text-primary mb-3"></i>
+                        <h4 class="mb-3">Email</h4>
+                        <p class="mb-0">info@bereketstore.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lokasi -->
+    <section class="lokasi py-5" id="lokasi">
+        <div class="container mt-4 pt-4">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-4 fw-bold mb-3">Lokasi Kami</h2>
+                </div>
+                <div class="col-md-6"> <!-- Kolom untuk deskripsi lokasi -->
+                    <div class="container bg-light p-4 rounded shadow mb-3" data-aos="fade-right" data-aos-duration="1500">
+                        <p class="text-muted" style="font-size: 1.1em;">Bereket Store terletak di <strong>Kompleks Pondok Pesantren Tanwirussunnah</strong>, Blok E2 No. 18, Kabupaten Gowa, Sulawesi Selatan.</p>
+                        <p class="font-weight-bold" style="font-size: 1.2em;">Jadwal Buka:</p>
+                        <p class="text-muted" style="font-size: 1.1em;">Senin - Jumat: <strong>08.00 - 17.00</strong></p>
+                        <p class="text-muted" style="font-size: 1.1em;">Sabtu: <strong>09.00 - 15.00</strong></p>
+                        <p class="text-muted" style="font-size: 1.1em;">Minggu: <strong>Tutup</strong></p>
+                    </div>
+                </div>
+                <div class="col-md-6"  data-aos="fade-left" data-aos-duration="1500"> <!-- Kolom untuk peta -->
+                    <div class="row">
+                        <div class="col-12">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7946.312251069582!2d119.50621254331062!3d-5.238156031747537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbee133a6a67c83%3A0x6b82cf5813431253!2sPondok%20Pesantren%20Tanwirussunnah!5e0!3m2!1sen!2sid!4v1727844917849!5m2!1sen!2sid" 
+                                width="100%" 
+                                height="450" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <!-- Company Information -->
+                <div class="col-md-4 mb-4">
+                    <h5>Bereket Store</h5>
+                    <p>Bereket Store merupakan toko yang menyediakan produk-produk berkualitas tinggi langsung dari alam.</p>
+                    <p><strong>Address:</strong></p>
+                    <p>
+                        Kompleks Pondok Pesantren Tanwirussunnah <br>
+                        Blok E2 No. 18 <br>
+                        Kabupaten Gowa <br>
+                        Sulawesi Selatan <br>
+                        92171
+                    </p>
+                </div>
+                <!-- Quick Links -->
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#banner" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="#about-us" class="text-white text-decoration-none">Tentang Kami</a></li>
+                        <li><a href="#products" class="text-white text-decoration-none">Produk</a></li>
+                        <li><a href="#gallery" class="text-white text-decoration-none">Gallery</a></li>
+                        <li><a href="#testimonials" class="text-white text-decoration-none">Testimoni</a></li>
+                        <li><a href="#faq" class="text-white text-decoration-none">FAQ</a></li>
+                        <li><a href="#contact" class="text-white text-decoration-none">Kontak</a></li>
+                        <li><a href="#lokasi" class="text-white text-decoration-none">Lokasi</a></li>
+                    </ul>
+                </div>
+                <!-- Contact Information -->
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>Wa Admin   : <a href="https://wa.me/6281354325595" class="text-white text-decoration-none">081354325595</a></li>
+                        <li>Instagram  : <a href="https://www.instagram.com/habiblhdaa_" class="text-white text-decoration-none">@habiblhdaa_</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <p>&copy; 2024 Bereket Store. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+      </footer>
+
+    <!-- Skrip JavaScript Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+                target: '.navbar',
+                offset: 56 // Sesuaikan dengan tinggi navbar Anda
+            })
+        });
+
+        var swiper = new Swiper(".testimonialSwiper", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+    </script>
+</body>
+</html>
